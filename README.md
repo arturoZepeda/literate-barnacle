@@ -40,7 +40,7 @@ ToDo
 
 ## Licencia
 
-Este proyecto está bajo la Licencia MIT. Para más detalles, consulta el archivo [LICENSE](MIT).
+Este proyecto está bajo la Licencia MIT. Para más detalles, consulta el archivo [LICENSE](LICENSE).
 ---
 
 ¡Esperamos que esta aplicación te ayude a llevar un mejor control de tus gastos! Si tienes alguna pregunta o comentario, no dudes en ponerte en contacto con nosotros.
