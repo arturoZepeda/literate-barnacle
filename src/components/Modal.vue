@@ -13,6 +13,37 @@
             @click="$emit('ocultar-modal')"
             />
         </div>
+        <div 
+        class="contenedor"
+        >
+            <form class="nuevo-gasto">
+                <legend>Añadir gasto</legend>
+                <div class="campo">
+                    <label for="nombre">Nombre gasto:</label>
+                    <input type="text" id="nombre" placeholder="Ej. Transporte" />
+                </div>
+                <div class="campo">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" placeholder="Añade la cantidad Ej. 100" />
+                </div>
+                <div class="campo">
+                    <label for="categoria">Categoria:</label>
+                    <select id="categoria">
+                        <option value="" disabled selected>-- Seleccione --</option>
+                        <option value="ahorro">Ahorro</option>
+                        <option value="comida">Comida</option>
+                        <option value="casa">Casa</option>
+                        <option value="gastos">Gastos Varios</option>
+                        <option value="transporte">Transporte</option>
+                        <option value="salud">Salud</option>
+                        <option value="suscripciones">Suscripciones</option>
+                        <option value="deudas">Deudas</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                    <input type="submit" class="boton" value="Añadir" />
+                </div>
+            </form>
+        </div>
     </div>
 </template>
 <style scoped>
@@ -32,6 +63,57 @@
 }
 .cerrar-modal img{
     width: 3rem;
+    cursor: pointer;
+}
+.nuevo-gasto{
+    margin: 10rem auto 0 auto;
+    
+    
+    background-color: #fff;
+    width: 90%;
+    max-width: 500px;
+    
+    padding: 2rem;
+    border-radius: 0.5rem;
+}
+.nuevo-gasto legend{
+    font-weight: 700;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.nuevo-gasto input,
+.nuevo-gasto select{
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid #e1e1e1;
+        margin-top: 0.5rem;
+        border-radius: 0.5rem;
+        display: grid;
+        gap: 2rem;
+}
+.nuevo-gasto label{
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+    
+}
+.nuevo-gasto legend{
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.campos{
+    display: grid;
+    gap: 2rem;
+}
+.nuevo-gasto input[type="submit"]{
+    background-color: var(--azul);
+    color: var(--blanco);
+    font-weight: 700;
     cursor: pointer;
 }
 </style>
