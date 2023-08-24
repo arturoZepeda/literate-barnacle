@@ -23,6 +23,8 @@ const gasto = reactive({
   fecha: Date.now()
 });
 
+const gastos = ref([]);
+
 const definirPresupuesto=(cantidad)=>{
   presupuesto.value = cantidad;
   disponible.value = cantidad;
@@ -40,6 +42,14 @@ const ocultarModal =()=>{
   setTimeout(() => {
     modal.mostrar = false;
   }, 300);
+}
+const guardarGasto =()=>{
+  gasto.id = Date.now();
+  gastos.value.push({...gasto});
+  gasto.nombre = '';
+  gasto.cantidad = 0;
+  gasto.categoria = '';
+  ocultarModal();
 }
   </script>
 
@@ -72,10 +82,12 @@ const ocultarModal =()=>{
           <Modal 
             v-if="modal.mostrar"
             @ocultar-modal="ocultarModal"
+            @guardar-gasto="guardarGasto"
             :modal="modal"
             v-model:nombre="gasto.nombre"
             v-model:cantidad="gasto.cantidad"
             v-model:categoria="gasto.categoria"
+            
             />
         </main>
     </div>
