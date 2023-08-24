@@ -2,6 +2,10 @@
     import cerrarModal from '../assets/img/cerrar.svg';
 
     const emit = defineEmits(['ocultar-modal']);
+    const props = defineProps({
+        modal: Object,
+        required: true
+    });
 </script>
 
 <template>
@@ -14,7 +18,8 @@
             />
         </div>
         <div 
-        class="contenedor"
+        class="contenedor contenedor-formulario" 
+        :class="[modal.animar ? 'mostrar' : 'cerrar']"
         >
             <form class="nuevo-gasto">
                 <legend>Añadir gasto</legend>
@@ -64,6 +69,18 @@
 .cerrar-modal img{
     width: 3rem;
     cursor: pointer;
+}
+.contenedor-formulario{
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in;
+    opacity: 0;
+}
+.contenedor-formulario.mostrar{
+    opacity: 1;
+}
+.contenedor-formulario.cerrar{
+    opacity: 0;
 }
 .nuevo-gasto{
     margin: 10rem auto 0 auto;
