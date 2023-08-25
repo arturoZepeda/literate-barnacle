@@ -76,7 +76,7 @@ const guardarGasto =()=>{
           <div class="listado-gastos contenedor">
             <h2>{{ gastos.length >0 ? 'Gastos:' : 'No hay Gastos'}}</h2>
           </div>
-          <Gasto 
+          <Gasto class="contenedor sombra"
             v-for="gasto in gastos"
             :key="gasto.id"
             :gasto="gasto"/>

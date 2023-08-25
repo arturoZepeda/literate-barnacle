@@ -29,20 +29,65 @@ const diccionarioIconos = {
 <template>
     <div class = "gasto sombra">
         <div class="contenido">
+            <img class="icono" :src="diccionarioIconos[gasto.categoria]" :alt="[gasto.categoria]">
             <div class="detalles">
-                <div class="contenedor-grafico">
-                    <img :src="diccionarioIconos[gasto.categoria]" :alt="[gasto.categoria]">
-                </div>
+                <p class="categoria">{{ gasto.categoria }}</p>
                 <p class="nombre">{{ gasto.nombre }}</p>
-                <p class="fecha">{{ formatearFecha(gasto.fecha) }}</p>
-            
+
+                <p class="fecha">
+                    Fecha:
+                    <span>{{ formatearFecha(gasto.fecha) }} </span>
+                </p>
             </div>
         </div>
-
             <p class="cantidad">{{ formaterCantidad(gasto.cantidad) }}</p>
     </div>
 </template>
 
 <style scoped>
+.gasto{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.contenido{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+}
+.icono{
+    width: 5rem;
+    height: 5rem;
+}
+.detalles p{
+    margin : 0 0 1rem 0;
+}
+.categoria{
+    color: var(--gris);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 900
+}
+.nombre{
+    color: var(--gris-oscuro);
+    font-size: 2.4rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+.fecha{
+    color: var(--gris-oscuro);
+    font-size: 1.6rem;
+    font-weight: 900;
+}
+.fecha span{
+    font-weight: 400;
+}
+.canitdad{
+    font-size: 3rem;
+    font-weight: 900;
+    margin: 0;
+}
 
 </style>
