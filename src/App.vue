@@ -1,5 +1,5 @@
 <script setup>
-import { ref , reactive} from 'vue';
+import { ref , reactive, watch} from 'vue';
 
 import { generaId } from './helpers';
 import Presupuesto from './components/Presupuesto.vue';
@@ -16,6 +16,7 @@ const modal = reactive({
 
 const presupuesto = ref(0);
 const disponible = ref(0);
+const gastado = ref(0);
 const gasto = reactive({
   nombre: '',
   cantidad: 0,
@@ -25,6 +26,14 @@ const gasto = reactive({
 });
 
 const gastos = ref([]);
+
+watch(gastos,()=>{
+  const totalGastado=gastos.value.reduce((total,gasto)=>total+gasto.cantidad,0);
+  gastado.value = totalGastado;
+  disponible.value = presupuesto.value - totalGastado;
+}, {
+  deep: true
+});
 
 const definirPresupuesto=(cantidad)=>{
   presupuesto.value = cantidad;
@@ -55,7 +64,8 @@ const guardarGasto =()=>{
   </script>
 
   <template>
-    <div>
+    <div 
+    :class="{fijar : modal.mostrar}">
         <header>
           <h1>
             Planificador de gastos
@@ -69,6 +79,7 @@ const guardarGasto =()=>{
               v-else
             :presupuesto="presupuesto" 
             :disponible="disponible"
+            :gastado="gastado"
             />
           </div>
         </header>
@@ -130,6 +141,10 @@ const guardarGasto =()=>{
     }
     h2{
       font-size: 3rem;
+    }
+    .fijar{
+      overflow: hidden;
+      height: 100vh;
     }
     header{
       background-color: var(--azul);
