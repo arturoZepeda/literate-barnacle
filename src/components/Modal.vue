@@ -5,7 +5,7 @@
     
     const error = ref('');
 
-    const emit = defineEmits(['ocultar-modal', 'guardar-gasto' , 'update:nombre', 'update:cantidad', 'update:categoria']);
+    const emit = defineEmits(['ocultar-modal', 'guardar-gasto', 'eliminar-gasto', 'update:nombre', 'update:cantidad', 'update:categoria']);
     const props = defineProps({
         modal: {
             type: Object,
@@ -23,10 +23,14 @@
             type: String,
             required: true
         },
-
+        id:{
+            type: String,
+            required: false
+        }
     });
+
     const agregarGasto = () =>{
-        const {nombre, cantidad, categoria} = props;
+        const {nombre, cantidad, categoria, id} = props;
         if([nombre,cantidad,categoria].includes('')){
             error.value = 'Todos los campos son obligatorios';
             setTimeout(() => {
@@ -61,12 +65,12 @@
             <form class="nuevo-gasto"
             @submit.prevent="agregarGasto"
             >
-                <legend>Añadir gasto</legend>
+                <legend>{{ props.id ? 'Editar gasto' : 'Añadir gasto' }}</legend>
                 <Alerta v-if="error">
                     {{error}}
                 </Alerta>
                 <div class="campo">
-                    <label for="nombre">Nombre gasto: {{ nombre }}</label>
+                    <label for="nombre">Nombre gasto: </label>
                     <input type="text" id="nombre" placeholder="Ej. Transporte" :value="nombre" @input="$emit('update:nombre', $event.target.value)"/>
                 </div>
                 <div class="campo">
@@ -86,9 +90,10 @@
                         <option value="suscripciones">Suscripciones</option>
                         <option value="otros">Otros</option>
                     </select>
-                    <input type="submit" class="boton" value="Añadir" />
+                    <input type="submit" class="boton" :value="[props.id ? 'Actualizar' : 'Añadir' ]" />
                 </div>
             </form>
+            <button type="button" class="bton-eliminar" @click="$emit('eliminar-gasto')" v-if="props.id" >Borrar</button>
         </div>
     </div>
 </template>
@@ -173,5 +178,16 @@
     color: var(--blanco);
     font-weight: 700;
     cursor: pointer;
+}
+.bton-eliminar{
+    background-color: #ef4444;
+    color: var(--blanco);
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 1rem;
+    width: 100%;
+    margin-top: 10rem;
+    border: none;
 }
 </style>

@@ -89,6 +89,13 @@ const seleccionarGasto = id =>{
   Object.assign(gasto,gastoEditar);
   mostrarModal();
 }
+
+const eleminiargasto = () =>{
+  if (confirm('¿Estás seguro de eliminar el gasto?')){
+  gastos.value = gastos.value.filter(gastoState=>gastoState.id !== gasto.id);
+  ocultarModal();
+  }
+}
   </script>
 
   <template>
@@ -132,7 +139,9 @@ const seleccionarGasto = id =>{
             v-if="modal.mostrar"
             @ocultar-modal="ocultarModal"
             @guardar-gasto="guardarGasto"
+            @eliminar-gasto="eleminiargasto"
             :modal="modal"
+            :id="gasto.id"
             v-model:nombre="gasto.nombre"
             v-model:cantidad="gasto.cantidad"
             v-model:categoria="gasto.categoria"
