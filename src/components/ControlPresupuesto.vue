@@ -30,11 +30,13 @@ const calculaPorcentaje = computed (() => {
         <div class="contenedor-grafico">
             <CircleProgress 
             :percent="[calculaPorcentaje]"
+            :show-percent="true"
             :size="250"
             :borderWidth="25"
             :border-bg-width="25"
             fill-color="#3b82f6"
             empty-color="#f5f5f5"
+            class="porcentaje"
             />
         </div>   
 
@@ -107,4 +109,9 @@ const calculaPorcentaje = computed (() => {
         font-weight: 900;
         color: var(--azul);
     }   
+    .porcentaje {
+        font-weight: 900;   
+        font-size: 2.4rem;
+        color: var(--gris-oscuro);
+    }
 </style>
