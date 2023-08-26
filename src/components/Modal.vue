@@ -22,9 +22,9 @@
         categoria: {
             type: String,
             required: true
-        }
-    });
+        },
 
+    });
     const agregarGasto = () =>{
         const {nombre, cantidad, categoria} = props;
         if([nombre,cantidad,categoria].includes('')){
@@ -66,7 +66,7 @@
                     {{error}}
                 </Alerta>
                 <div class="campo">
-                    <label for="nombre">Nombre gasto:</label>
+                    <label for="nombre">Nombre gasto: {{ nombre }}</label>
                     <input type="text" id="nombre" placeholder="Ej. Transporte" :value="nombre" @input="$emit('update:nombre', $event.target.value)"/>
                 </div>
                 <div class="campo">

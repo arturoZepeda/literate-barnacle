@@ -35,6 +35,21 @@ watch(gastos,()=>{
   deep: true
 });
 
+watch(modal,()=>{
+  if (!modal.mostrar) {
+    Object.assign(gasto,{
+      nombre: '',
+      cantidad: 0,
+      categoria: '',
+      id : null,
+      fecha: Date.now()
+    });
+  }
+},{
+  deep:true
+});
+
+
 const definirPresupuesto=(cantidad)=>{
   presupuesto.value = cantidad;
   disponible.value = cantidad;
@@ -60,6 +75,12 @@ const guardarGasto =()=>{
   gasto.cantidad = 0;
   gasto.categoria = '';
   ocultarModal();
+}
+
+const seleccionarGasto = id =>{
+  const gastoEditar = gastos.value.filter(g=>g.id === id)[0];
+  Object.assign(gasto,gastoEditar);
+  mostrarModal();
 }
   </script>
 
@@ -89,6 +110,7 @@ const guardarGasto =()=>{
           </div>
           <Gasto class="contenedor sombra"
             v-for="gasto in gastos"
+            @seleccionar-gasto="seleccionarGasto"
             :key="gasto.id"
             :gasto="gasto"/>
 
@@ -107,7 +129,6 @@ const guardarGasto =()=>{
             v-model:nombre="gasto.nombre"
             v-model:cantidad="gasto.cantidad"
             v-model:categoria="gasto.categoria"
-            
             />
         </main>
     </div>
