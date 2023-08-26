@@ -37,18 +37,21 @@ watch(gastos,()=>{
 
 watch(modal,()=>{
   if (!modal.mostrar) {
-    Object.assign(gasto,{
+    reiniciarGasto();
+  }
+},{
+  deep:true
+});
+
+const reiniciarGasto =()=>{
+  Object.assign(gasto,{
       nombre: '',
       cantidad: 0,
       categoria: '',
       id : null,
       fecha: Date.now()
     });
-  }
-},{
-  deep:true
-});
-
+}
 
 const definirPresupuesto=(cantidad)=>{
   presupuesto.value = cantidad;
@@ -71,9 +74,7 @@ const ocultarModal =()=>{
 const guardarGasto =()=>{
   gasto.id = generaId(Date.now());
   gastos.value.push({...gasto});
-  gasto.nombre = '';
-  gasto.cantidad = 0;
-  gasto.categoria = '';
+  reiniciarGasto();
   ocultarModal();
 }
 
