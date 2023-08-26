@@ -1,5 +1,7 @@
 <script setup>
-import imagen from '../assets/img/grafico.jpg';
+import { computed } from 'vue';
+import CircleProgress from 'vue3-circle-progress';
+import "vue3-circle-progress/dist/circle-progress.css";
 import { formaterCantidad } from '../helpers' 
 
 const emit = defineEmits(['reset-gastos']);
@@ -18,12 +20,22 @@ const props = defineProps({
         required: true,
     }
 })
+const calculaPorcentaje = computed (() => {
+    return parseInt(((props.presupuesto - props.disponible) / props.presupuesto) * 100);
+})
 </script>
 
 <template>
     <div class="dos-columnas">
         <div class="contenedor-grafico">
-            <img :src="imagen"/>
+            <CircleProgress 
+            :percent="[calculaPorcentaje]"
+            :size="250"
+            :borderWidth="25"
+            :border-bg-width="25"
+            fill-color="#3b82f6"
+            empty-color="#f5f5f5"
+            />
         </div>   
 
         <div class="contenedor-presupuesto">
