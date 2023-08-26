@@ -123,6 +123,13 @@ const gastosFiltrados = computed(()=>{
   }
   return gastos.value;
 });
+
+const resetGastos = () =>{
+  if (confirm('¿Estás seguro de eliminar todos los gastos?')){
+    gastos.value = [];
+    presupuesto.value = 0;
+  }
+}
   </script>
 
   <template>
@@ -142,6 +149,7 @@ const gastosFiltrados = computed(()=>{
             :presupuesto="presupuesto" 
             :disponible="disponible"
             :gastado="gastado"
+            @reset-gastos="resetGastos"
             />
           </div>
         </header>

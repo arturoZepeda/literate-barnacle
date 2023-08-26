@@ -91,9 +91,10 @@
                         <option value="otros">Otros</option>
                     </select>
                     <input type="submit" class="boton" :value="[props.id ? 'Actualizar' : 'Añadir' ]" />
+                    <button type="button" class="bton-eliminar" @click="$emit('eliminar-gasto')" v-if="props.id" >Borrar</button>
                 </div>
             </form>
-            <button type="button" class="bton-eliminar" @click="$emit('eliminar-gasto')" v-if="props.id" >Borrar</button>
+            
         </div>
     </div>
 </template>
@@ -187,7 +188,7 @@
     cursor: pointer;
     padding: 1rem;
     width: 100%;
-    margin-top: 10rem;
+    margin-top: 2rem;
     border: none;
 }
 </style>
