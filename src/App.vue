@@ -72,10 +72,16 @@ const ocultarModal =()=>{
   }, 300);
 }
 const guardarGasto =()=>{
-  gasto.id = generaId(Date.now());
-  gastos.value.push({...gasto});
-  reiniciarGasto();
+  if (gasto.id){
+    const { id } = gasto;
+    const i = gastos.value.findIndex((gasto => gasto.id === id));
+    gastos.value[i] = {...gasto};
+  }else{
+    gasto.id = generaId(Date.now());
+    gastos.value.push({...gasto});
+  }
   ocultarModal();
+  reiniciarGasto();
 }
 
 const seleccionarGasto = id =>{
